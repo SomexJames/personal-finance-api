@@ -12,21 +12,11 @@ public class FinancePlanner {
     }
 
     public void addIncome(String date, double amount, int recurrencePeriod, String name, LocalDate stopDate, int maxOccurrences) {
-        DailyTransaction dailyTransaction = transactionsByDate.computeIfAbsent(date, _ -> new DailyTransaction(date));
-        dailyTransaction.addIncome(amount, recurrencePeriod, name, stopDate, maxOccurrences);
-        updateCarryoverBalance(LocalDate.parse(date), recurrencePeriod);
-        if (recurrencePeriod != 0) {
-            processRecurringTransactions(date, amount, recurrencePeriod, name, stopDate, maxOccurrences, "income");
-        }
+        addTransaction(date, amount, recurrencePeriod, name, stopDate, maxOccurrences, TransactionType.INCOME);
     }
 
     public void addExpense(String date, double amount, int recurrencePeriod, String name, LocalDate stopDate, int maxOccurrences) {
-        DailyTransaction dailyTransaction = transactionsByDate.computeIfAbsent(date, _ -> new DailyTransaction(date));
-        dailyTransaction.addExpense(amount, recurrencePeriod, name, stopDate, maxOccurrences);
-        updateCarryoverBalance(LocalDate.parse(date), recurrencePeriod);
-        if (recurrencePeriod != 0) {
-            processRecurringTransactions(date, amount, recurrencePeriod, name, stopDate, maxOccurrences, "expense");
-        }
+        addTransaction(date, amount, recurrencePeriod, name, stopDate, maxOccurrences, TransactionType.EXPENSE);
     }
 
     public void setBeginningBalance(String date, double amount) {
@@ -43,6 +33,21 @@ public class FinancePlanner {
         return transactionsByDate;
     }
 
+    private void addTransaction(String date, double amount, int recurrencePeriod, String name, LocalDate stopDate, int maxOccurrences, TransactionType type) {
+        DailyTransaction dailyTransaction = transactionsByDate.computeIfAbsent(date, DailyTransaction::new);
+        if (type == TransactionType.INCOME) {
+            dailyTransaction.addIncome(amount, recurrencePeriod, name, stopDate, maxOccurrences);
+        } else if (type == TransactionType.EXPENSE){
+            dailyTransaction.addExpense(amount, recurrencePeriod, name, stopDate, maxOccurrences);
+        }
+
+        updateCarryoverBalance(LocalDate.parse(date), recurrencePeriod);
+
+        if (recurrencePeriod > 0) {
+            processRecurringTransactions(date, amount, recurrencePeriod, name, stopDate, maxOccurrences, type);
+        }
+    }
+
     private void updateCarryoverBalance(LocalDate date, int plusDays) {
         if (plusDays > 0) {
             LocalDate nextDate = date.plusDays(plusDays);
@@ -55,7 +60,7 @@ public class FinancePlanner {
         }
     }
 
-    private void processRecurringTransactions(String dateStr, double amount, int recurrencePeriod, String name, LocalDate stopDate, int maxOccurrences, String type) {
+    private void processRecurringTransactions(String dateStr, double amount, int recurrencePeriod, String name, LocalDate stopDate, int maxOccurrences, TransactionType type) {
         LocalDate nextDate = LocalDate.parse(dateStr);
         int occurrences = 0;
 
@@ -71,13 +76,18 @@ public class FinancePlanner {
 
             String nextDateStr = nextDate.toString();
             DailyTransaction nextDayTransaction = transactionsByDate.computeIfAbsent(nextDateStr, _ -> new DailyTransaction(nextDateStr));
-            if (type.equals("income")) {
+            if (type == TransactionType.INCOME) {
                 nextDayTransaction.addIncome(amount, recurrencePeriod, name, stopDate, maxOccurrences);
-            } else if (type.equals("expense")) {
+            } else if (type == TransactionType.EXPENSE) {
                 nextDayTransaction.addExpense(amount, recurrencePeriod, name, stopDate, maxOccurrences);
             }
             updateCarryoverBalance(nextDate, recurrencePeriod);
         }
+    }
+
+    private enum TransactionType {
+        INCOME,
+        EXPENSE
     }
 }
 
