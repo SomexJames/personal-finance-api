@@ -8,43 +8,52 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public class TransactionService {
-    private Transaction transaction;
-    private String name;
-    private double amount;
-    private LocalDate startDate;
-    private int recurrencePeriod; // in days
-    private LocalDate stopDate;
-    private int maxOccurrences;
-    private TransactionType type;
 
     public Map<LocalDate, DailyTransaction> addTransaction(Map<LocalDate, DailyTransaction> dailyTransactions, Transaction transaction) {
-        name = transaction.getName();
-        amount = transaction.getAmount();
-        startDate = transaction.getStartDate();
-        recurrencePeriod = transaction.getRecurrencePeriod();
-        stopDate = transaction.getStopDate();
-        maxOccurrences = transaction.getMaxOccurrences();
-        type = transaction.getType();
+        LocalDate startDate = transaction.getStartDate();
+        int recurrencePeriod = transaction.getRecurrencePeriod();
 
         if (recurrencePeriod > 0) {
-            dailyTransactions = processRecurringTransactions(dailyTransactions, name, amount, startDate, recurrencePeriod, stopDate, maxOccurrences, type);
+            return processRecurringTransactions(dailyTransactions, transaction);
         } else {
-            // get or create DailyTransaction at startDate
-                // add transaction to the DailyTransaction's transactions list
+            DailyTransaction dailyTransaction = dailyTransactions.getOrDefault(startDate, new DailyTransaction(startDate, 0.0, 0.0));
+            dailyTransaction.getTransactions().add(transaction);
+            dailyTransactions.put(startDate, dailyTransaction);
         }
 
         return dailyTransactions;
     }
 
     public Map<LocalDate, DailyTransaction> removeTransaction(Map<LocalDate, DailyTransaction> dailyTransactions, Transaction transaction) {
-        // remove all instances of transaction object in dailyTransactions
-        // return updated dailyTransactions
+        dailyTransactions.values().forEach(dailyTransaction ->
+                dailyTransaction.getTransactions().removeIf(t -> t.equals(transaction))
+        );
+        return dailyTransactions;
     }
 
-    private Map<LocalDate, DailyTransaction> processRecurringTransactions(Map<LocalDate, DailyTransaction> dailyTransactions, String name, double amount, LocalDate startDate, int recurrencePeriod, LocalDate stopDate, int maxOccurrences, TransactionType type) {
-        // for all recurring dates until the stop condition (stopDate or maxOccurrences),
-            // if the date is not found in dailyTransactions, instantiate a LocalDate, DailyTransaction pair in dailyTransactions
-        // add the transaction item to each DailyTransaction's transactions list
-        // return updated dailyTransactions
+    public Map<LocalDate, DailyTransaction> processRecurringTransactions(Map<LocalDate, DailyTransaction> dailyTransactions, Transaction transaction) {
+        LocalDate currentDate = transaction.getStartDate();
+        int occurrences = 0;
+        int recurrencePeriod = transaction.getRecurrencePeriod();
+        LocalDate stopDate = transaction.getStopDate();
+        int maxOccurrences = transaction.getMaxOccurrences();
+
+        while (shouldContinue(currentDate, stopDate, occurrences, maxOccurrences)) {
+            DailyTransaction dailyTransaction = dailyTransactions.getOrDefault(currentDate, new DailyTransaction(currentDate, 0.0, 0.0));
+            dailyTransaction.getTransactions().add(transaction);
+            dailyTransactions.put(currentDate, dailyTransaction);
+
+            currentDate = currentDate.plusDays(recurrencePeriod);
+            occurrences++;
+        }
+
+        return dailyTransactions;
+    }
+
+    private boolean shouldContinue(LocalDate currentDate, LocalDate stopDate, int occurrences, int maxOccurrences) {
+        boolean hasNotReachedStopDate = (stopDate == null) || (currentDate.isBefore(stopDate) || currentDate.equals(stopDate));
+        boolean hasNotExceededOccurrences = maxOccurrences <= 0 || occurrences < maxOccurrences;
+
+        return hasNotReachedStopDate && hasNotExceededOccurrences;
     }
 }

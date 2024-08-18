@@ -1,45 +1,58 @@
 package org.example.service;
 
-import org.example.enumeration.AccountType;
+import org.example.enumeration.TransactionType;
 import org.example.model.Account;
 import org.example.model.DailyTransaction;
-import org.example.enumeration.TransactionType;
 import org.example.model.Transaction;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
+import java.util.Optional;
 
 public class AccountService {
-    private Account account;
-    private TransactionService transactionService;
-    private Map<LocalDate, DailyTransaction> dailyTransactions;
+    private final TransactionService transactionService;
+
+    public AccountService() {
+        this.transactionService = new TransactionService();
+    }
 
     public void addTransaction(Account account, Transaction transaction) {
-        dailyTransactions = account.getDailyTransactions();
+        Map<LocalDate, DailyTransaction> dailyTransactions = account.getDailyTransactions();
         transactionService.addTransaction(dailyTransactions, transaction);
     }
 
-    private void addDailyTransaction(LocalDate date, DailyTransaction dailyTransaction) {
-        dailyTransactions.put(date, dailyTransaction);
+    public double getBalance(Account account, LocalDate date) {
+        DailyTransaction dailyTransaction = account.getDailyTransactionByDate(date);
+        if (dailyTransaction == null) {
+            return getLastKnownBalance(account, date); // No transactions on this date
+        }
+
+        double totalIncome = getAmount(dailyTransaction, TransactionType.INCOME);
+        double totalExpenses = getAmount(dailyTransaction, TransactionType.EXPENSE);
+
+        return totalIncome - totalExpenses;
     }
 
-    public double getBalance(Account account, String date) {
-        // find DailyTransaction by date
-        // get total income amounts
-        // get total expense amounts
-        // return income - expense
+    private double getLastKnownBalance(Account account, LocalDate date) {
+        Map<LocalDate, DailyTransaction> dailyTransactions = account.getDailyTransactions();
+
+        // Find the most recent transaction before the given date
+        Optional<LocalDate> lastKnownDate = dailyTransactions.keySet().stream()
+                .filter(d -> d.isBefore(date))
+                .max(LocalDate::compareTo);
+
+        // Return the ending balance of the most recent transaction, or 0 if no previous transactions exist
+        return lastKnownDate.map(localDate -> dailyTransactions.get(localDate).getEndingBalance()).orElse(0.0);
     }
 
-    public double getAmount(Account account, DailyTransaction dailyTransaction, TransactionType type) {
-        // find DailyTransaction
-        // sum all amounts in type
-        // return sum
+    private double getAmount(DailyTransaction dailyTransaction, TransactionType type) {
+        return dailyTransaction.getTransactions().stream()
+                .filter(transaction -> transaction.getType() == type)
+                .mapToDouble(Transaction::getAmount)
+                .sum();
     }
 
-    private void processRecurringTransactions(String dateStr, double amount, int recurrencePeriod, String name, LocalDate stopDate, int maxOccurrences, TransactionType type) {
-        // for every recurring date, if there's a DailyTransaction object with the assoc. account, addIncome/addExpense
-            // if not, create new DailyTransaction for that date
+    private void processRecurringTransactions(Account account, Transaction transaction) {
+        transactionService.processRecurringTransactions(account.getDailyTransactions(), transaction);
     }
 }
