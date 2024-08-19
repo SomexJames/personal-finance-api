@@ -13,6 +13,11 @@ public class Account {
     private AccountType accountType;
     private Map<LocalDate, DailyTransaction> dailyTransactions;
 
+    public Account() {
+        this.id = UUID.randomUUID().toString();
+        this.dailyTransactions = new HashMap<>();
+    }
+
     public Account(AccountType accountType) {
         this.id = UUID.randomUUID().toString();
         this.accountType = accountType;
@@ -44,10 +49,14 @@ public class Account {
     }
 
     public void addDailyTransaction(LocalDate date, DailyTransaction dailyTransaction) {
-        dailyTransactions.put(date, dailyTransaction);
+        this.dailyTransactions.put(date, dailyTransaction);
     }
 
     public DailyTransaction getDailyTransactionByDate(LocalDate date) {
         return dailyTransactions.get(date);
+    }
+
+    public void setDailyTransaction(LocalDate date, DailyTransaction dailyTransaction) {
+        this.dailyTransactions.put(date, dailyTransaction);
     }
 }

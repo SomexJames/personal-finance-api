@@ -3,32 +3,31 @@ package org.example.service;
 import org.example.enumeration.TransactionType;
 import org.example.model.DailyTransaction;
 import org.example.model.Transaction;
+import org.example.model.Account;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Optional;
 
 public class TransactionService {
 
-    public Map<LocalDate, DailyTransaction> addTransaction(Map<LocalDate, DailyTransaction> dailyTransactions, Transaction transaction) {
+    public void addTransaction(Map<LocalDate, DailyTransaction> dailyTransactions, Transaction transaction) {
         LocalDate startDate = transaction.getStartDate();
         int recurrencePeriod = transaction.getRecurrencePeriod();
 
         if (recurrencePeriod > 0) {
-            return processRecurringTransactions(dailyTransactions, transaction);
+            processRecurringTransactions(dailyTransactions, transaction);
         } else {
             DailyTransaction dailyTransaction = dailyTransactions.getOrDefault(startDate, new DailyTransaction(startDate, 0.0, 0.0));
             dailyTransaction.getTransactions().add(transaction);
             dailyTransactions.put(startDate, dailyTransaction);
         }
-
-        return dailyTransactions;
     }
 
-    public Map<LocalDate, DailyTransaction> removeTransaction(Map<LocalDate, DailyTransaction> dailyTransactions, Transaction transaction) {
+    public void removeTransaction(Map<LocalDate, DailyTransaction> dailyTransactions, String transactionId) {
         dailyTransactions.values().forEach(dailyTransaction ->
-                dailyTransaction.getTransactions().removeIf(t -> t.equals(transaction))
+                dailyTransaction.getTransactions().removeIf(t -> t.getId().equals(transactionId))
         );
-        return dailyTransactions;
     }
 
     public Map<LocalDate, DailyTransaction> processRecurringTransactions(Map<LocalDate, DailyTransaction> dailyTransactions, Transaction transaction) {
@@ -48,6 +47,16 @@ public class TransactionService {
         }
 
         return dailyTransactions;
+    }
+
+    public double getLastKnownBalance(Account account, LocalDate date) {
+        Map<LocalDate, DailyTransaction> dailyTransactions = account.getDailyTransactions();
+
+        Optional<LocalDate> lastKnownDate = dailyTransactions.keySet().stream()
+                .filter(d -> d.isBefore(date))
+                .max(LocalDate::compareTo);
+
+        return lastKnownDate.map(localDate -> dailyTransactions.get(localDate).getEndingBalance()).orElse(0.0);
     }
 
     private boolean shouldContinue(LocalDate currentDate, LocalDate stopDate, int occurrences, int maxOccurrences) {

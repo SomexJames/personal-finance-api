@@ -8,10 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DailyTransaction {
-    private final LocalDate date;
+    private LocalDate date;
     private double startingBalance;
     private List<Transaction> transactions;
     private double endingBalance;
+
+    public DailyTransaction() {
+        this.transactions = new ArrayList<>();
+    }
 
     public DailyTransaction(LocalDate date, double startingBalance, double endingBalance) {
         this.date = date;
@@ -38,5 +42,9 @@ public class DailyTransaction {
 
     public double getEndingBalance() {
         return endingBalance;
+    }
+
+    public void setEndingBalance(double endingBalance) {
+        this.endingBalance = endingBalance;
     }
 }
