@@ -1,12 +1,15 @@
-package org.example;
+package org.example.service;
 
-import org.example.service.TransactionService;
-import org.example.service.AccountService;
+import org.example.enumeration.AccountType;
 import org.example.enumeration.TransactionType;
+import org.example.model.Account;
 import org.example.model.DailyTransaction;
 import org.example.model.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -14,14 +17,19 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 class TransactionServiceTest {
 
     private TransactionService transactionService;
     private Map<LocalDate, DailyTransaction> dailyTransactions;
 
+    @Mock
+    private Account account;
+
     @BeforeEach
     void setUp() {
+        MockitoAnnotations.openMocks(this);
         transactionService = new TransactionService();
         dailyTransactions = new HashMap<>();
     }
@@ -60,7 +68,7 @@ class TransactionServiceTest {
         Transaction transaction = new Transaction("Salary", 1000.0, date, 0, null, 0, TransactionType.INCOME);
         transactionService.addTransaction(dailyTransactions, transaction);
 
-        transactionService.removeTransaction(dailyTransactions, transaction);
+        transactionService.removeTransaction(dailyTransactions, transaction.getId());
         assertEquals(0, dailyTransactions.get(date).getTransactions().size());
     }
 

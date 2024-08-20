@@ -1,7 +1,5 @@
-package org.example;
+package org.example.service;
 
-import org.example.service.TransactionService;
-import org.example.service.AccountService;
 import org.example.enumeration.AccountType;
 import org.example.enumeration.TransactionType;
 import org.example.model.Account;
@@ -26,6 +24,7 @@ class AccountServiceTest {
     @InjectMocks
     private AccountService accountService;
 
+    @Mock
     private Account account;
 
     @BeforeEach
@@ -74,5 +73,17 @@ class AccountServiceTest {
 
         double balance = accountService.getBalance(account, date);
         assertEquals(0.0, balance);
+    }
+
+    @Test
+    void getDailyTransactionByDate_shouldReturnCorrectDailyTransaction() {
+        LocalDate date = LocalDate.of(2024, 8, 16);
+        DailyTransaction expectedTransaction = new DailyTransaction(date, 100.0, 200.0);
+
+        account.addDailyTransaction(date, expectedTransaction);
+
+        DailyTransaction actualTransaction = account.getDailyTransactionByDate(date);
+
+        assertEquals(expectedTransaction, actualTransaction, "The retrieved DailyTransaction should match the one added.");
     }
 }
