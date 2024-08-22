@@ -4,27 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3cbaf0b-8e2f-4d9b-bf1b-7c1b91f7a85d" name="Changes" comment="added services to account and transaction">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/enumeration/AccountType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/enumeration/TransactionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/DailyTransaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Transaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/AccountServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/TransactionServiceTest.java" afterDir="false" />
+    <list default="true" id="a3cbaf0b-8e2f-4d9b-bf1b-7c1b91f7a85d" name="Changes" comment="v1 release">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/v1/AccountController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/v1/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/controller/v1/UserControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DailyTransaction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Expense.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/FinancePlanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/FinancePlanner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/FinancePlannerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/FinancePlannerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Income.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Transaction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/DailyTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/DailyTransaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Transaction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/AccountService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/TransactionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/FinancePlannerControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/FinancePlannerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/AccountServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/service/AccountServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/TransactionServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/service/TransactionServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +32,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -73,37 +69,69 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.AccountServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build simple-finance-planner.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.FinancePlannerControllerTest.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.FinancePlannerTest.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.FinancePlannerTest.testRecurringExpenseWithMaxOccurrences.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.FinancePlannerTest.testRecurringExpenseWithStopDate.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.FinancePlannerTest.testRecurringIncome.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.TransactionServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.simple-finance-planner [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin script (Beta).build.gradle.kts.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/Brandon/Projects/simple-finance-planner/src/main/java/org/example&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Brandon/Projects/simple-finance-planner/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;jvm.logging&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.AccountControllerTest.executor": "Run",
+    "Gradle.AccountServiceTest (1).executor": "Run",
+    "Gradle.AccountServiceTest.executor": "Run",
+    "Gradle.AccountServiceTest.getBalance_shouldReturnCorrectBalanceForDate.executor": "Debug",
+    "Gradle.AccountServiceTest.getBalance_shouldReturnLastKnownBalanceIfNoTransactionOnDate.executor": "Debug",
+    "Gradle.AccountServiceTest.getDailyTransactionByDate_shouldReturnCorrectDailyTransaction.executor": "Run",
+    "Gradle.Build simple-finance-planner.executor": "Run",
+    "Gradle.FinancePlannerControllerTest.executor": "Debug",
+    "Gradle.FinancePlannerTest.executor": "Debug",
+    "Gradle.FinancePlannerTest.testRecurringExpenseWithMaxOccurrences.executor": "Debug",
+    "Gradle.FinancePlannerTest.testRecurringExpenseWithStopDate.executor": "Debug",
+    "Gradle.FinancePlannerTest.testRecurringIncome.executor": "Debug",
+    "Gradle.TransactionServiceTest (1).executor": "Run",
+    "Gradle.TransactionServiceTest.calculateBalance_shouldReturnCorrectBalanceWhenDailyTransactionExists.executor": "Debug",
+    "Gradle.TransactionServiceTest.executor": "Run",
+    "Gradle.UserControllerTest.executor": "Run",
+    "Gradle.simple-finance-planner [:Main.main()].executor": "Run",
+    "Kotlin script (Beta).build.gradle.kts.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/Brandon/Projects/simple-finance-planner/src/main/java/org/example",
+    "onboarding.tips.debug.path": "C:/Users/Brandon/Projects/simple-finance-planner/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "jvm.logging"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.TransactionServiceTest">
+  <component name="RunManager" selected="Gradle.AccountControllerTest">
+    <configuration name="AccountControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.example.controller.v1.AccountControllerTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="AccountServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -117,7 +145,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.example.AccountServiceTest&quot;" />
+            <option value="&quot;org.example.service.AccountServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -128,7 +156,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="FinancePlannerControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AccountServiceTest.getBalance_shouldReturnLastKnownBalanceIfNoTransactionOnDate" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -141,55 +169,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.example.FinancePlannerControllerTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="FinancePlannerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.example.FinancePlannerTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="FinancePlannerTest.testRecurringIncome" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.example.FinancePlannerTest.testRecurringIncome&quot;" />
+            <option value="&quot;org.example.service.AccountServiceTest.getBalance_shouldReturnLastKnownBalanceIfNoTransactionOnDate&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -213,7 +193,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.example.TransactionServiceTest&quot;" />
+            <option value="&quot;org.example.service.TransactionServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.example.controller.v1.UserControllerTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -226,11 +230,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AccountControllerTest" />
+        <item itemvalue="Gradle.UserControllerTest" />
         <item itemvalue="Gradle.TransactionServiceTest" />
         <item itemvalue="Gradle.AccountServiceTest" />
-        <item itemvalue="Gradle.FinancePlannerControllerTest" />
-        <item itemvalue="Gradle.FinancePlannerTest" />
-        <item itemvalue="Gradle.FinancePlannerTest.testRecurringIncome" />
+        <item itemvalue="Gradle.AccountServiceTest.getBalance_shouldReturnLastKnownBalanceIfNoTransactionOnDate" />
       </list>
     </recent_temporary>
   </component>
@@ -283,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717870012329</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="v1 release">
+      <option name="closed" value="true" />
+      <created>1724020694658</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1724020694658</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -303,7 +315,8 @@
     <MESSAGE value="added test cases" />
     <MESSAGE value="replaced string literals with an enum" />
     <MESSAGE value="added services to account and transaction" />
-    <option name="LAST_COMMIT_MESSAGE" value="added services to account and transaction" />
+    <MESSAGE value="v1 release" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1 release" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -318,5 +331,15 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.example.model.DailyTransaction" memberName="transactions" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="GradleRunConfiguration">
+        <watch expression="account.getDailyTransactionByDate(date)" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
